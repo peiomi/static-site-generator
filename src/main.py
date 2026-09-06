@@ -1,3 +1,4 @@
+# run script with ./main.sh
 from textnode import TextNode, TextType
 
 def main():
