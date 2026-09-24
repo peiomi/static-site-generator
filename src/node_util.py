@@ -72,3 +72,17 @@ class NodeUtil():
                 new_nodes.append(TextNode(text=remaining, text_type=TextType.PLAIN))
 
         return new_nodes
+
+    def text_to_textnodes(self, text):
+        nodes = [TextNode(text, TextType.PLAIN)]
+
+        nodes = self.split_nodes_image(nodes)
+        nodes = self.split_nodes_link(nodes)
+        nodes = self.split_nodes_delimiter(nodes, "**", TextType.BOLD)
+        nodes = self.split_nodes_delimiter(nodes, "__", TextType.ITALIC)
+        nodes = self.split_nodes_delimiter(nodes, "`", TextType.CODE)
+
+        return nodes
+
+
+            
