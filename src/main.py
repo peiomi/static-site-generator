@@ -2,11 +2,17 @@
 from copy_static import copy_dir
 import os
 import shutil
-from generate_page import generate_page
+from generate_page import generate_pages_recursive
+import sys
 
 def main():
-    public_dir = "public"
+    basepath = "/"
+    if len(sys.argv) > 1:
+        basepath = sysargv[1]
+
+    public_dir = "docs"
     static_dir = "static"
+    content_dir = "content"
     # delete public
     if os.path.exists(public_dir):
         shutil.rmtree(public_dir)
@@ -18,7 +24,7 @@ def main():
     copy_dir(static_dir, public_dir)
 
     # generate html pages
-    generate_page("content/index.md", "template.html", "public/index.html")
+    generate_pages_recursive(content_dir, "template.html", public_dir, basepath)
 
 if __name__ == "__main__":
     main()
