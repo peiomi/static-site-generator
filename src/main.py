@@ -8,7 +8,7 @@ import sys
 def main():
     basepath = "/"
     if len(sys.argv) > 1:
-        basepath = sysargv[1]
+        basepath = sys.argv[1]
 
     public_dir = "docs"
     static_dir = "static"
