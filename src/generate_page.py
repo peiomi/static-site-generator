@@ -23,15 +23,14 @@ def generate_page(from_path, template_path, dest_path, basepath):
         template = f.read()
 
     html_node = util.markdown_to_html_node(markdown)
-    print(repr(html_node))
     content = html_node.to_html()
 
     title = extract_title(markdown)
 
     html_page = template.replace("{{ Title }}", title)
     html_page = html_page.replace("{{ Content }}", content)
-    html_page = html_page.replace('href="/', f'href="{basepath}')
-    html_page = html_page.replace('src="/', f'src="{basepath}')
+    html_page = html_page.replace('href="/', f'href="{basepath}/')
+    html_page = html_page.replace('src="/', f'src="{basepath}/')
 
     directory = os.path.dirname(dest_path)
 
@@ -40,6 +39,7 @@ def generate_page(from_path, template_path, dest_path, basepath):
 
     print("BASEPATH:", basepath)
     print(html_page)
+
     with open(dest_path, "w", encoding="utf-8") as f:
         f.write(html_page)
 
@@ -47,6 +47,8 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, bas
     for item in os.listdir(dir_path_content):
         source = os.path.join(dir_path_content, item)
         dest = os.path.join(dest_dir_path, item)
+        print(f"source={source}")
+        print(f"dest={dest}")
 
         if os.path.isfile(source):
             dest = dest.replace(".md", ".html")
