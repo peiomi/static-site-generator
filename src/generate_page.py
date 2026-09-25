@@ -38,6 +38,8 @@ def generate_page(from_path, template_path, dest_path, basepath):
     if directory:
         os.makedirs(directory, exist_ok=True)
 
+    print("BASEPATH:", basepath)
+    print(html_page)
     with open(dest_path, "w", encoding="utf-8") as f:
         f.write(html_page)
 
