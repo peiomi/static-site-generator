@@ -1,9 +1,24 @@
 # run script with ./main.sh
-from textnode import TextNode, TextType
+from copy_static import copy_dir
+import os
+import shutil
+from generate_page import generate_page
 
 def main():
-    text_node = TextNode("This is some anchor text", TextType.LINK.name, "https://www.boot.dev")
-    print(text_node.__repr__())
+    public_dir = "public"
+    static_dir = "static"
+    # delete public
+    if os.path.exists(public_dir):
+        shutil.rmtree(public_dir)
+
+    # make new one
+    os.mkdir(public_dir)
+
+    # copy static -> public
+    copy_dir(static_dir, public_dir)
+
+    # generate html pages
+    generate_page("content/index.md", "template.html", "public/index.html")
 
 if __name__ == "__main__":
     main()
